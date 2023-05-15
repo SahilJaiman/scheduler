@@ -1,8 +1,9 @@
 "use client"
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 import Link from 'next/link';
+import Task from '@/components/task';
 
 const taskList = [
     { id: '1', title: 'Develop a New Feature for the Website', startTime: '09:00', endTime: '11:00' },
@@ -18,7 +19,7 @@ export default function Tasks() {
     const [tasks, setTasks] = useState(taskList);
 
     useEffect(() => {
-        
+
         const sortedTasks = [...tasks].sort((a, b) => {
             const startTimeA = new Date(`01/01/2000 ${a.startTime}`);
             const startTimeB = new Date(`01/01/2000 ${b.startTime}`);
@@ -45,31 +46,12 @@ export default function Tasks() {
             </div>
 
             <div className='flex flex-col w-full max-w-2xl'>
-                <ul className='flex flex-col justify-center gap-2  p-4 w-full'>
+                <div className='flex flex-col justify-center gap-2  p-4 w-full'>
                     {tasks.map((task) => (
-                        <li className='flex border-b-2 p-4  w-full' key={task.id}>
-                            <a href={`/tasks/${task.id}`}>
-                                <div className='flex gap-4 flex-col md:flex-row w-full'>
-                                    <div className='flex text-slate-500 gap-2'>
-                                        <div>
-                                            {task.startTime}
-                                        </div>
-                                        <div>{'-'}</div>
-                                        <div>
-                                            {task.endTime}
-                                        </div>
-                                    </div>
-                                    <div className='font-bold'>
-                                        {task.title}
-                                    </div>
-
-                                </div>
-                            </a>
-                    
-                        </li>
+                        <Task task={task} />
 
                     ))}
-                </ul>
+                </div>
             </div>
 
         </main>

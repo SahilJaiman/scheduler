@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function TaskPage({ params, onTaskUpdate }) {
+export default function TaskPage({ params }) {
 
     const router = useRouter();
 
@@ -22,8 +22,9 @@ export default function TaskPage({ params, onTaskUpdate }) {
             endTime,
         };
 
-        onTaskUpdate(id, updatedTask);
-        router.back();
+
+
+        router.back({ query: { updatedTask: JSON.stringify(updatedTask) } });
     };
 
 
